@@ -1,2 +1,8 @@
 npm install @mui/material @emotion/react @emotion/styled
 npm install -g firebase-tools
+npm i uuid
+npm install --save @types/uuid
+npm install react-router-dom
+npm i react-router
+npm install react-router-dom --save
+npm i @types/react-router-dom
