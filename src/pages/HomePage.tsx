@@ -1,12 +1,13 @@
 
 import { Stack, Typography } from "@mui/material";
-import Logo from "../components/Logo";
-import Header from "../components/Header";
+import Logo from "../components/SharedComponents/Logo";
+import Header from "../components/SharedComponents/Header";
+import AboutMe from "./AboutMe";
 
 const HomePage = () => {
     return (<>
-        <Stack justifyContent={"center"} alignItems={"center"} height={"100vh"} width={"100vw"}>
-            <Header></Header>
+        <Stack justifyContent={"center"} alignItems={"center"} width={"100vw"}>
+            <AboutMe></AboutMe>
         </Stack>
     </>)
 }
