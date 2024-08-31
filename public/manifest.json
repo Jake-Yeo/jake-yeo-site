@@ -1,20 +1,20 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Jake Yeo",
+  "name": "Jake Yeo Personal Site",
   "icons": [
     {
       "src": "LogoJY.svg",
       "sizes": "64x64 32x32 24x24 16x16",
-      "type": "svg"
+      "type": "image/svg+xml"
     },
     {
       "src": "LogoJY.svg",
-      "type": "svg",
+      "type": "image/svg+xml",
       "sizes": "192x192"
     },
     {
       "src": "LogoJY.svg",
-      "type": "svg",
+      "type": "image/svg+xml",
       "sizes": "512x512"
     }
   ],
