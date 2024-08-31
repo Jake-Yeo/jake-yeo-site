@@ -21,7 +21,7 @@ const ProjectCard = ({ projectName, description, builtWith, githubLink, liveDemo
                 paddingTop: '5px',
                 marginBottom: '50px',
                 width: "80%",
-                backdropFilter: 'blur(10px)',
+                backdropFilter: 'blur(3px)',
                 boxShadow: "0px 5px 10px rgba(0, 0, 0, 0.7)",
                 borderRadius: "1em",
                 backgroundColor: "rgba(255, 255, 255, 0.1)",
