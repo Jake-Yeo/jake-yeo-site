@@ -1,10 +1,16 @@
 import { Box, Grid, Stack } from "@mui/material"
 import CategorizedSkills from "../components/MySkillsComponents/CategorizedSkills"
+import { forwardRef } from "react"
 
-const MySkills = () => {
+
+interface props {
+    ref: React.RefObject<HTMLDivElement>
+}
+
+const MySkills = forwardRef<HTMLDivElement, props>((props, ref) => {
 
     return (<>
-        <Box minHeight="100vh">
+        <Box ref={ref} minHeight="100vh">
             <Grid container spacing={1} justifyContent={'center'}>
                 <Grid item>
                     <CategorizedSkills key={1} skillCategory={"Languages"} skills={["Typescript", "Java", "C", "HTML", "CSS", "Javascript"]} ></CategorizedSkills>
@@ -18,6 +24,6 @@ const MySkills = () => {
             </Grid>
         </Box>
     </>)
-}
+})
 
 export default MySkills
