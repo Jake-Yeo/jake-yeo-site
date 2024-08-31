@@ -19,7 +19,7 @@ const ProjectCard = ({ projectName, description, builtWith, githubLink, liveDemo
                 paddingLeft: '10px',
                 paddingRight: '10px',
                 paddingTop: '5px',
-                marginBottom: '10px',
+                marginBottom: '50px',
                 width: "80%",
                 backdropFilter: 'blur(10px)',
                 boxShadow: "0px 5px 10px rgba(0, 0, 0, 0.7)",
@@ -29,30 +29,34 @@ const ProjectCard = ({ projectName, description, builtWith, githubLink, liveDemo
         >
             <FontStyles ></FontStyles>
             <Stack alignItems={'center'}>
-                <Typography textAlign={"center"} fontWeight={600} fontSize={"20px"} fontFamily={"'Poppins', sans-serif"} color={"white"}>{projectName}</Typography>
-                <Typography fontWeight={200} fontSize={"15px"} fontFamily={"'Poppins', sans-serif"} color={"white"}>{description}</Typography>
-                <Link sx={{
-                    marginTop: "10px",
-                    zIndex: 1,
-                    color: 'white', // Set text color to white
-                    textDecorationColor: 'rgba(255, 255, 255, 0.5)',
-                    width: 'fit-content',
+                <Typography textAlign={"center"} fontWeight={600} fontSize={"40px"} fontFamily={"'Poppins', sans-serif"} color={"white"}>{projectName}</Typography>
+                <Typography fontWeight={200} fontSize={"20px"} fontFamily={"'Poppins', sans-serif"} color={"white"}>{description}</Typography>
+                <Link
+                    fontWeight={200} fontSize={"20px"} fontFamily={"'Poppins', sans-serif"}
+                    sx={{
+                        marginTop: "10px",
+                        zIndex: 1,
+                        color: 'white', // Set text color to white
+                        textDecorationColor: 'rgba(255, 255, 255, 0.5)',
+                        width: 'fit-content',
 
-                }} href={githubLink}
+                    }} href={githubLink}
                     underline="always"
                     target="_blank"
                     rel="noopener noreferrer" // they said to add this for security
                 >
                     Github Link
                 </Link>
-                <Link sx={{
-                    zIndex: 1,
-                    margin: "10px",
-                    color: 'white', // Set text color to white
-                    textDecorationColor: 'rgba(255, 255, 255, 0.5)',
-                    width: 'fit-content',
+                <Link
+                    fontWeight={200} fontSize={"20px"} fontFamily={"'Poppins', sans-serif"}
+                    sx={{
+                        zIndex: 1,
+                        margin: "10px",
+                        color: 'white', // Set text color to white
+                        textDecorationColor: 'rgba(255, 255, 255, 0.5)',
+                        width: 'fit-content',
 
-                }} href={liveDemoLink}
+                    }} href={liveDemoLink}
                     underline="always"
                     target="_blank"
                     rel="noopener noreferrer" // they said to add this for security

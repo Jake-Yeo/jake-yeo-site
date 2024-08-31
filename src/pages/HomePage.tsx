@@ -26,7 +26,7 @@ const HomePage = () => {
                 <MyProjects ref={projectsRef}></MyProjects>
                 <Contact ref={contactRef}></Contact>
                 <FontStyles />
-                <Typography width="100%" textAlign={"center"} fontSize={"8px"} fontWeight={100} fontFamily={"'Poppins', sans-serif"} color={"white"}>Copyright 2024 © Jake Yeo</Typography>
+                <Typography width="100%" textAlign={"center"} fontSize={"15px"} fontWeight={100} fontFamily={"'Poppins', sans-serif"} color={"white"}>Copyright 2024 © Jake Yeo</Typography>
             </Stack>
         </Box>
     </>)

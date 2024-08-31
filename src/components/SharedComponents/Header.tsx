@@ -43,7 +43,7 @@ const Header = ({ aboutRef, skillsRef, projectsRef, contactRef, scrollBoxRef }: 
             <ListItem disablePadding>
                 <ListItemButton onClick={onClick}>
                     <FontStyles></FontStyles>
-                    <Typography textAlign={"center"} fontWeight={200} fontSize={"10px"} fontFamily={"'Poppins', sans-serif"} color={"white"}>
+                    <Typography textAlign={"center"} fontWeight={200} fontSize={"20px"} fontFamily={"'Poppins', sans-serif"} color={"white"}>
                         {text}
                     </Typography>
                 </ListItemButton>
@@ -52,7 +52,7 @@ const Header = ({ aboutRef, skillsRef, projectsRef, contactRef, scrollBoxRef }: 
 
     const DrawerList =
         <>
-            <Box sx={{ width: 100 }} role="presentation" onClick={toggleDrawer(false)}>
+            <Box sx={{ width: 150 }} role="presentation" onClick={toggleDrawer(false)}>
                 <List>
                     {getDrawerItem("About Me", () => { scrollTo(aboutRef) })}
                     {getDrawerItem("My Skills", () => { scrollTo(skillsRef) })}
@@ -68,7 +68,7 @@ const Header = ({ aboutRef, skillsRef, projectsRef, contactRef, scrollBoxRef }: 
             const elementTop = ref.current.getBoundingClientRect().top;
 
             // Calculate the element's position relative to the scrollBoxRef
-            const offsetPosition = elementTop - boxTop - 40; // Adjust for offset (40px)
+            const offsetPosition = elementTop - boxTop - 80; // Adjust for offset (40px)
 
             scrollBoxRef.current.scrollTo({
                 top: scrollBoxRef.current.scrollTop + offsetPosition,
@@ -84,17 +84,17 @@ const Header = ({ aboutRef, skillsRef, projectsRef, contactRef, scrollBoxRef }: 
             direction={"row"}>
             <CustomButton onClick={() => {
                 scrollTo(aboutRef);
-            }} text={"About Me"} fontSize="10px" minWidth="0px" width="90px" height="20px" boxShadow="none"></CustomButton>
+            }} text={"About Me"} fontSize="20px" minWidth="0px" width="150px" height="35px" boxShadow="none"></CustomButton>
             <CustomButton onClick={() => {
                 scrollTo(skillsRef);
-            }} text={"My Skills"} fontSize="10px" minWidth="0px" width="90px" height="20px" boxShadow="none"></CustomButton>
+            }} text={"My Skills"} fontSize="20px" minWidth="0px" width="150px" height="35px" boxShadow="none"></CustomButton>
             <CustomButton onClick={() => {
                 scrollTo(projectsRef);
-            }} text={"My Projects"} fontSize="10px" minWidth="0px" width="90px" height="20px" boxShadow="none"></CustomButton>
+            }} text={"My Projects"} fontSize="20px" minWidth="0px" width="150px" height="35px" boxShadow="none"></CustomButton>
         </Stack>
         <CustomButton onClick={() => {
             scrollTo(contactRef);
-        }} text={"Contact"} fontSize="10px" minWidth="0px" width="52.88px" height="20px" boxShadow="none" backgroundColor="black" marginRight="10px"></CustomButton>
+        }} text={"Contact"} marginRight="30px" fontSize="20px" minWidth="0px" width="150px" height="35px" boxShadow="none" backgroundColor="black"></CustomButton>
     </>
 
 
@@ -107,13 +107,15 @@ const Header = ({ aboutRef, skillsRef, projectsRef, contactRef, scrollBoxRef }: 
             direction={"row"}
             justifyContent={"space-between"}
             sx={{
-                height: "40px",
+                height: "80px",
                 width: "100%",
                 position: "fixed",
                 top: 0,
                 left: 0,
             }}>
-            <Logo padding={"10px"} height={30}></Logo>
+            <Box width="180px" paddingLeft={"10px"}>
+                <Logo padding={"10px"} height={60}></Logo>
+            </Box>
             <Drawer anchor="right" sx={{
                 "& .MuiPaper-root": {
                     backgroundColor: "#686868", // Set the background color of the Drawer
@@ -121,9 +123,9 @@ const Header = ({ aboutRef, skillsRef, projectsRef, contactRef, scrollBoxRef }: 
             }} open={open} onClose={toggleDrawer(false)}>
                 {DrawerList}
             </Drawer>
-            {windowWidth < 430
+            {windowWidth < 800
                 ?
-                <CustomButton onClick={toggleDrawer(true)} text={"Menu"} fontSize="10px" minWidth="0px" width="52.88px" height="20px" boxShadow="none" backgroundColor="black" marginRight="10px"></CustomButton>
+                <CustomButton onClick={toggleDrawer(true)} text={"Menu"} fontSize="20px" minWidth="0px" width="100px" height="35px" boxShadow="none" backgroundColor="black" marginRight="20px"></CustomButton>
                 :
                 windowsFormat
             }

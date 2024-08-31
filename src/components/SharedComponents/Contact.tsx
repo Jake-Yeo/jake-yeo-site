@@ -13,28 +13,28 @@ const Contact = forwardRef<HTMLDivElement, props>((props, ref) => {
                 target="_blank"
                 rel="noopener noreferrer" // they said to add this for security
             >
-                <img width="20px" height="20px" src={"/svgs/github.svg"}></img>
+                <img width="40px" height="40px" src={"/svgs/github.svg"}></img>
             </Link>
             <Link
                 href="https://www.linkedin.com/in/jake-yeo/"
                 target="_blank"
                 rel="noopener noreferrer" // they said to add this for security
             >
-                <img width="20px" height="20px" src={"/svgs/linkedin.svg"}></img>
+                <img width="40px" height="40px" src={"/svgs/linkedin.svg"}></img>
             </Link>
             <Link
                 href="https://www.instagram.com/jake._.yeo/"
                 target="_blank"
                 rel="noopener noreferrer" // they said to add this for security
             >
-                <img width="20px" height="20px" src={"/svgs/instagram.svg"}></img>
+                <img width="40px" height="40px" src={"/svgs/instagram.svg"}></img>
             </Link>
             <Link
                 href="mailto:jakeyeozh@gmail.com"
                 target="_blank"
                 rel="noopener noreferrer" // they said to add this for security
             >
-                <img width="20px" height="20px" src={"/svgs/gmail.svg"}></img>
+                <img width="40px" height="40px" src={"/svgs/gmail.svg"}></img>
             </Link>
         </Stack>
     </>)

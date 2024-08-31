@@ -16,7 +16,7 @@ const CategorizedSkills = ({ skillCategory, skills }: props) => {
     skillsDisplay.push(
         <>
             <FontStyles></FontStyles>
-            <Typography textAlign={"center"} fontWeight={600} fontSize={"20px"} fontFamily={"'Poppins', sans-serif"} color={"white"} key={key}>{skillCategory}</Typography>
+            <Typography textAlign={"center"} fontWeight={600} fontSize={"30px"} fontFamily={"'Poppins', sans-serif"} color={"white"} key={key}>{skillCategory}</Typography>
         </>)
 
     for (const skill of skills) {
@@ -25,7 +25,7 @@ const CategorizedSkills = ({ skillCategory, skills }: props) => {
         key++;
         skillsDisplay.push(
             <>
-                <Typography textAlign={"center"} fontWeight={200} fontSize={"15px"} fontFamily={"'Poppins', sans-serif"} color={"white"} key={key}>{skill}</Typography>
+                <Typography textAlign={"center"} fontWeight={200} fontSize={"20px"} fontFamily={"'Poppins', sans-serif"} color={"white"} key={key}>{skill}</Typography>
             </>);
     }
 
