@@ -4,10 +4,26 @@ import CustomButton from "./CustomButton";
 
 const Header = () => {
 
-    // 464px is the minimum width before the buttons look weird
+    // 427px is the minimum width before the buttons look weird
+
+    const windowsFormat = <>
+        <Stack
+            spacing={1}
+            alignItems={"center"}
+            direction={"row"}>
+            <CustomButton text={"About Me"} fontSize="10px" minWidth="0px" width="90px" height="20px" boxShadow="none"></CustomButton>
+            <CustomButton text={"My Skills"} fontSize="10px" minWidth="0px" width="90px" height="20px" boxShadow="none"></CustomButton>
+            <CustomButton text={"My Projects"} fontSize="10px" minWidth="0px" width="90px" height="20px" boxShadow="none"></CustomButton>
+        </Stack>
+
+        <CustomButton text={"Contact"} fontSize="10px" minWidth="0px" width="52.88px" height="20px" boxShadow="none" backgroundColor="black" marginRight="10px"></CustomButton>
+    </>
+
+
 
     return (<>
         <Stack
+            zIndex={1}
             spacing={1}
             alignItems={"center"}
             direction={"row"}
@@ -20,17 +36,7 @@ const Header = () => {
                 left: 0,
             }}>
             <Logo padding={"10px"} height={30}></Logo>
-            <Stack
-                spacing={1}
-                alignItems={"center"}
-                direction={"row"}>
-                <CustomButton text={"About Me"} fontSize="10px" minWidth="0px" width="90px" height="20px" boxShadow="none"></CustomButton>
-                <CustomButton text={"My Skills"} fontSize="10px" minWidth="0px" width="90px" height="20px" boxShadow="none"></CustomButton>
-                <CustomButton text={"My Projects"} fontSize="10px" minWidth="0px" width="90px" height="20px" boxShadow="none"></CustomButton>
-            </Stack>
-
-                <CustomButton text={"Contact"} fontSize="10px" minWidth="0px" width="52.88px" height="20px" boxShadow="none" backgroundColor="black" marginRight="10px"></CustomButton>
-         
+            {windowsFormat}
         </Stack >
     </>);
 }

@@ -6,7 +6,6 @@ import JakeYeo from "../components/AboutMeComponents/JakeYeo"
 const AboutMe = () => {
     return (<>
         <Stack justifyContent={"center"} alignItems={"center"} height={"100vh"} width={"100%"}>
-            <Header></Header>
             <ProfilePic></ProfilePic>
             <JakeYeo></JakeYeo>
         </Stack>
