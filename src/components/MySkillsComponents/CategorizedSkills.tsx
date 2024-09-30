@@ -35,7 +35,7 @@ const CategorizedSkills = ({ skillCategory, skills }: props) => {
                 backdropFilter: 'blur(3px)',
                 boxShadow: "0px 5px 10px rgba(0, 0, 0, 0.7)",
                 borderRadius: "1em",
-                backgroundColor: "rgba(255, 255, 255, 0.1)",
+                backgroundColor: "#787474", //rgba(255, 255, 255, 0.1)
                 marginLeft: '10px',
                 marginRight: '10px',
                 marginBottom: '10px',
