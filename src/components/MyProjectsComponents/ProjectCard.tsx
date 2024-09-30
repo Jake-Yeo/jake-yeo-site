@@ -30,7 +30,7 @@ const ProjectCard = ({ projectName, description, builtWith, githubLink, liveDemo
             <FontStyles ></FontStyles>
             <Stack alignItems={'center'}>
                 <Typography textAlign={"center"} fontWeight={600} fontSize={"40px"} fontFamily={"'Poppins', sans-serif"} color={"white"}>{projectName}</Typography>
-                <Typography fontWeight={200} fontSize={"20px"} fontFamily={"'Poppins', sans-serif"} color={"white"}>{description}</Typography>
+                <Typography textAlign={"center"} fontWeight={200} fontSize={"20px"} fontFamily={"'Poppins', sans-serif"} color={"white"}>{description}</Typography>
                 <Link
                     fontWeight={200} fontSize={"20px"} fontFamily={"'Poppins', sans-serif"}
                     sx={{
