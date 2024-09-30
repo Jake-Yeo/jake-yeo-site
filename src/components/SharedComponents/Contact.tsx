@@ -23,13 +23,6 @@ const Contact = forwardRef<HTMLDivElement, props>((props, ref) => {
                 <img width="40px" height="40px" src={"/svgs/linkedin.svg"}></img>
             </Link>
             <Link
-                href="https://www.instagram.com/jake._.yeo/"
-                target="_blank"
-                rel="noopener noreferrer" // they said to add this for security
-            >
-                <img width="40px" height="40px" src={"/svgs/instagram.svg"}></img>
-            </Link>
-            <Link
                 href="mailto:jakeyeozh@gmail.com"
                 target="_blank"
                 rel="noopener noreferrer" // they said to add this for security

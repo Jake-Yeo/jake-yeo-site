@@ -11,7 +11,7 @@ const MySkills = forwardRef<HTMLDivElement, props>((props, ref) => {
 
     return (<>
         <Box ref={ref} minHeight="100vh">
-            <Grid container spacing={1} justifyContent={'center'}>
+            <Grid flex={1} container spacing={1} justifyContent={'center'}>
                 <Grid item>
                     <CategorizedSkills key={1} skillCategory={"Languages"} skills={["Typescript", "Java", "C", "HTML", "CSS", "Javascript"]} ></CategorizedSkills>
                 </Grid>
