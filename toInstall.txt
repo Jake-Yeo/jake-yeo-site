@@ -6,3 +6,5 @@ npm install react-router-dom
 npm i react-router
 npm install react-router-dom --save
 npm i @types/react-router-dom
+npm install @mui/material@latest
+npm install @mui/lab@latest

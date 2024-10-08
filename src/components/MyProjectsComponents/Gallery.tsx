@@ -1,5 +1,6 @@
 import { Box, Grid, ImageList, ImageListItem } from "@mui/material"
 import { ReactElement } from "react"
+import { Masonry } from "@mui/lab";
 
 interface props {
     pictureUrls: string[]
@@ -12,22 +13,23 @@ const Gallery = ({ pictureUrls }: props) => {
     for (const pictureUrl of pictureUrls) {
         pictures.push(
             <>
-                <ImageListItem key={pictureUrl}>
+                <Box key={pictureUrl}>
                     <img
                         srcSet={`${pictureUrl}?w=248&fit=crop&auto=format&dpr=2 2x`}
                         src={`${pictureUrl}?w=248&fit=crop&auto=format`}
                         alt={pictureUrl}
                         loading="lazy"
+                        style={{ width: '100%', display: 'block' }} // Ensures proper image scaling
                     />
-                </ImageListItem>
+                </Box>
             </>
         )
     }
 
     return (<>
-        <ImageList variant="masonry" cols={2} gap={8}>
-            {pictures}
-        </ImageList>
+            <Masonry columns={2} spacing={2}>
+                {pictures}
+            </Masonry>
     </>)
 }
 
