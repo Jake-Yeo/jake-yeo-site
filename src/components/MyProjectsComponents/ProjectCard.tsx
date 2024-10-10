@@ -10,9 +10,10 @@ interface props {
     githubLink: string,
     liveDemoLink?: string,
     pictureUrls: string[],
+    about?: string
 }
 
-const ProjectCard = ({ projectName, description, builtWith, githubLink, liveDemoLink, pictureUrls }: props) => {
+const ProjectCard = ({ projectName, description, builtWith, githubLink, liveDemoLink, pictureUrls, about }: props) => {
     return (<>
         <Box
             sx={{
@@ -64,6 +65,10 @@ const ProjectCard = ({ projectName, description, builtWith, githubLink, liveDemo
                     {liveDemoLink ? "Live Demo" : ""}
                 </Link>
                 <CategorizedSkills skillCategory={"Built With"} skills={[builtWith]}></CategorizedSkills>
+                {about ?
+                    <CategorizedSkills skillCategory={"About"} skills={[about]}></CategorizedSkills>
+                    :
+                    <></>}
                 <Gallery pictureUrls={pictureUrls}></Gallery>
             </Stack>
         </Box>

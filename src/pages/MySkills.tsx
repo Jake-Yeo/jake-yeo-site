@@ -13,13 +13,13 @@ const MySkills = forwardRef<HTMLDivElement, props>((props, ref) => {
         <Box ref={ref} minHeight="100vh">
             <Grid flex={1} container spacing={1} justifyContent={'center'}>
                 <Grid item>
-                    <CategorizedSkills key={1} skillCategory={"Languages"} skills={["Typescript", "Java", "C", "HTML", "CSS", "Javascript"]} ></CategorizedSkills>
+                    <CategorizedSkills key={1} skillCategory={"Languages"} skills={["TypeScript", "JavaScript", "HTML", "CSS", "Java", "Python", "C",]} ></CategorizedSkills>
                 </Grid>
                 <Grid item>
-                    <CategorizedSkills key={3} skillCategory={"Frameworks"} skills={["ReactTS", " ExpressJS", "NodeJS", " Material-UI", "CSS", "JavaFx"]} ></CategorizedSkills>
+                    <CategorizedSkills key={3} skillCategory={"Frameworks"} skills={["ReactTS", " ExpressJS", "NodeJS", " Material-UI", "CSS", "JavaFx", "Mocha", "Chai", "JUnit"]} ></CategorizedSkills>
                 </Grid>
                 <Grid item>
-                    <CategorizedSkills key={2} skillCategory={"Tools"} skills={["MongoDb", " FireBase", "VS-code", " GitHub", "JWT", "Vercel", "Railway", "Insomnia", "Eclipse", "Netbeans"]} ></CategorizedSkills>
+                    <CategorizedSkills key={2} skillCategory={"Tools"} skills={["MongoDb", " FireBase", "VS-code", " GitHub", "JWT", "JSON", "Vercel", "Railway", "Insomnia", "Eclipse", "Netbeans"]} ></CategorizedSkills>
                 </Grid>
             </Grid>
         </Box>
