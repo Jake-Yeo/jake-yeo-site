@@ -16,7 +16,7 @@ const Contact = forwardRef<HTMLDivElement, props>((props, ref) => {
                 <img width="40px" height="40px" src={"/svgs/github.svg"}></img>
             </Link>
             <Link
-                href="https://www.linkedin.com/in/jake-yeo/"
+                href="https://ca.linkedin.com/in/jake-yeo"
                 target="_blank"
                 rel="noopener noreferrer" // they said to add this for security
             >

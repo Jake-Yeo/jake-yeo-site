@@ -177,7 +177,7 @@ const HomePage = () => {
             <a href="https://github.com/Jake-Yeo/" target="_blank" rel="noreferrer">
               GitHub <span aria-hidden="true">↗</span>
             </a>
-            <a href="https://www.linkedin.com/in/jake-yeo/" target="_blank" rel="noreferrer">
+            <a href="https://ca.linkedin.com/in/jake-yeo" target="_blank" rel="noreferrer">
               LinkedIn <span aria-hidden="true">↗</span>
             </a>
           </div>
