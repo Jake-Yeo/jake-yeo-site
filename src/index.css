@@ -35,6 +35,23 @@ a:focus-visible {
   outline-offset: 4px;
 }
 
+.skip-link {
+  position: fixed;
+  z-index: 20;
+  top: 12px;
+  left: 12px;
+  padding: 10px 14px;
+  background: var(--ink);
+  color: var(--background);
+  font-family: "DM Mono", monospace;
+  font-size: 12px;
+  transform: translateY(-160%);
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
 .site-shell {
   width: min(1180px, calc(100% - 48px));
   margin: 0 auto;
@@ -146,6 +163,16 @@ footer {
   font-size: clamp(31px, 4vw, 50px);
   font-weight: 500;
   line-height: 1.08;
+}
+
+.explore-link,
+.back-link,
+.card-action {
+  display: inline-block;
+  margin-top: 24px;
+  color: var(--accent);
+  font-family: "DM Mono", monospace;
+  font-size: 12px;
 }
 
 .experience-item {
@@ -420,6 +447,103 @@ footer h2 {
   color: var(--muted);
   font-family: "DM Mono", monospace;
   font-size: 10px;
+}
+
+.route-main {
+  min-height: calc(100vh - 74px);
+  max-width: 820px;
+  padding: 96px 0;
+}
+
+.route-main h1 {
+  margin: 14px 0 20px;
+  font-size: clamp(42px, 7vw, 72px);
+  font-weight: 500;
+  line-height: 1;
+}
+
+.route-intro,
+.detail-summary,
+.route-not-found > p:not(.eyebrow),
+.optional-media-state {
+  max-width: 680px;
+  color: var(--muted);
+  font-size: 17px;
+  line-height: 1.6;
+}
+
+.experience-route-list {
+  margin-top: 58px;
+  padding: 0;
+  border-top: 1px solid var(--line);
+  list-style: none;
+}
+
+.experience-route-card {
+  border-bottom: 1px solid var(--line);
+}
+
+.experience-card-link {
+  display: block;
+  padding: 28px 0 34px;
+}
+
+.experience-card-link h2,
+.experience-detail-page h2 {
+  margin: 26px 0 0;
+  font-size: clamp(26px, 4vw, 38px);
+  font-weight: 500;
+}
+
+.experience-card-link > p:not(.experience-role) {
+  max-width: 680px;
+  margin: 22px 0 0;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.experience-card-link:hover h2,
+.back-link:hover,
+.explore-link:hover {
+  color: var(--accent);
+}
+
+.experience-detail-page {
+  margin-top: 52px;
+}
+
+.experience-detail-page .eyebrow {
+  margin-top: 28px;
+}
+
+.experience-detail-page section {
+  margin-top: 52px;
+}
+
+.experience-detail-page .experience-highlights {
+  max-width: 760px;
+}
+
+.optional-media-state {
+  margin: 34px 0 0;
+  padding: 18px;
+  border: 1px dashed var(--line);
+  font-size: 13px;
+}
+
+.experience-media {
+  display: block;
+  width: 100%;
+  margin-top: 34px;
+  border: 1px solid var(--line);
+}
+
+.route-not-found {
+  max-width: 620px;
+}
+
+.route-not-found .back-link {
+  margin-top: 30px;
 }
 
 footer {

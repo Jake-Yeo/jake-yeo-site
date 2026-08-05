@@ -1,3 +1,7 @@
+import { useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import { approvedExperiences } from '../experience';
+
 type Project = {
   name: string;
   year: string;
@@ -81,36 +85,6 @@ const skills = [
   "Firebase",
 ];
 
-const workExperience = [
-  {
-    company: "UBC Faculty of Medicine",
-    role: "Software Developer Intern",
-    period: "May - Dec 2025",
-    product: "Faculty360",
-    summary:
-      "Built the core document-authoring system for Faculty360 as part of a three-developer team, helping turn a small internal app into a full-stack platform for faculty data and academic document generation.",
-    highlights: [
-      "Designed a deeply nested drag-and-drop document builder for configurable 20-50 page academic documents.",
-      "Built AWS Lambda and Docker pipelines using Gotenberg and Adobe APIs to generate PDF and DOCX files.",
-      "Implemented UBC OIDC login, application authorization, PostgreSQL features, and GraphQL-backed workflows.",
-    ],
-    technologies: ["JavaScript", "Python", "PostgreSQL", "GraphQL", "AWS", "Docker"],
-  },
-  {
-    company: "Invoke Media",
-    role: "Web Developer Intern",
-    period: "Jan - Apr 2025",
-    product: "Chunks Chunks Chunks · TrueLoyalty",
-    summary:
-      "Worked across frontend, backend, and AWS infrastructure on production applications, with primary ownership across video upload, processing, clipping, and playback workflows.",
-    highlights: [
-      "Implemented direct-to-S3 multipart uploads using expiring presigned URLs and event-driven Lambda processing.",
-      "Built an FFmpeg pipeline for HLS segmentation, parallel clip generation, streaming, and MP4 downloads.",
-      "Recovered a drifted AWS environment as the only available engineer before a CEO-led product demonstration.",
-    ],
-    technologies: ["TypeScript", "Next.js", "Python", "GraphQL", "AWS Lambda", "FFmpeg"],
-  },
-];
 
 const recentProjects = [
   {
@@ -149,10 +123,21 @@ const recentProjects = [
 ];
 
 const HomePage = () => {
+  const location = useLocation();
+
+  useEffect(() => {
+    document.title = 'Jake Yeo | Software Developer';
+    if (typeof window.scrollTo === 'function') window.scrollTo(0, 0);
+    document.querySelector<HTMLElement>('main h1')?.focus();
+  }, [location.pathname]);
+
   return (
     <div className="site-shell">
+      <a className="skip-link" href="#main-content" onClick={() => document.getElementById('main-content')?.focus()}>
+        Skip to main content
+      </a>
       <header className="site-header">
-        <a className="wordmark" href="#top" aria-label="Jake Yeo, back to top">
+        <a className="wordmark" href="#main-content" aria-label="Jake Yeo, back to top">
           Jake Yeo
         </a>
         <nav aria-label="Primary navigation">
@@ -163,10 +148,10 @@ const HomePage = () => {
         </nav>
       </header>
 
-      <main id="top">
+      <main id="main-content" tabIndex={-1}>
         <section className="intro" id="about">
           <p className="eyebrow">Computer science · UBC</p>
-          <h1>Software developer working across web, cloud, and data.</h1>
+          <h1 tabIndex={-1}>Software developer working across web, cloud, and data.</h1>
           <p className="intro-copy">
             I&apos;m Jake, a computer science student and full-stack developer based in
             Vancouver. I enjoy turning ambitious ideas into clear, reliable products,
@@ -174,10 +159,10 @@ const HomePage = () => {
           </p>
           <div className="intro-links">
             <a href="mailto:jakeyeozh@gmail.com">Email me <span aria-hidden="true">↗</span></a>
-            <a href="https://github.com/Jake-Yeo/" target="_blank" rel="noreferrer">
+            <a href="https://github.com/Jake-Yeo/" target="_blank" rel="noopener noreferrer">
               GitHub <span aria-hidden="true">↗</span>
             </a>
-            <a href="https://ca.linkedin.com/in/jake-yeo" target="_blank" rel="noreferrer">
+            <a href="https://ca.linkedin.com/in/jake-yeo" target="_blank" rel="noopener noreferrer">
               LinkedIn <span aria-hidden="true">↗</span>
             </a>
           </div>
@@ -187,9 +172,10 @@ const HomePage = () => {
           <div className="section-heading experience-heading">
             <p className="eyebrow">Experience</p>
             <h2 id="experience-title">Building production software with real users.</h2>
+            <Link className="explore-link" to="/experience">Explore experience <span aria-hidden="true">↗</span></Link>
           </div>
           <div className="experience-list">
-            {workExperience.map((job) => (
+            {approvedExperiences.map((job) => (
               <article className="experience-item" key={job.company}>
                 <div className="experience-meta">
                   <span>{job.period}</span>
@@ -255,8 +241,8 @@ const HomePage = () => {
                       {project.technologies.map((technology) => <li key={technology}>{technology}</li>)}
                     </ul>
                     <div className="project-links">
-                      {project.demo && <a href={project.demo} target="_blank" rel="noreferrer">Live site <span aria-hidden="true">↗</span></a>}
-                      {project.source && <a href={project.source} target="_blank" rel="noreferrer">Source <span aria-hidden="true">↗</span></a>}
+                      {project.demo && <a href={project.demo} target="_blank" rel="noopener noreferrer">Live site <span aria-hidden="true">↗</span></a>}
+                      {project.source && <a href={project.source} target="_blank" rel="noopener noreferrer">Source <span aria-hidden="true">↗</span></a>}
                     </div>
                   </div>
                 </div>
@@ -285,9 +271,9 @@ const HomePage = () => {
                   </ul>
                   <div className="project-links">
                     {project.demo && (
-                      <a href={project.demo} target="_blank" rel="noreferrer">Live site <span aria-hidden="true">↗</span></a>
+                      <a href={project.demo} target="_blank" rel="noopener noreferrer">Live site <span aria-hidden="true">↗</span></a>
                     )}
-                    <a href={project.github} target="_blank" rel="noreferrer">Source <span aria-hidden="true">↗</span></a>
+                    <a href={project.github} target="_blank" rel="noopener noreferrer">Source <span aria-hidden="true">↗</span></a>
                   </div>
                 </div>
               </article>
