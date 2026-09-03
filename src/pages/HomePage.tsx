@@ -88,6 +88,17 @@ const skills = [
 
 const recentProjects = [
   {
+    name: "Callumployed",
+    period: "Aug–Sep 2026",
+    context: "Collaborative software project",
+    description:
+      "A local-first job-search tracker and automation tool for role discovery, company management, and application preparation.",
+    contribution:
+      "Built durable Autoprep and application-material workflows, hardened source-grounded résumé and cover-letter generation, and improved the vanilla web UI while integrating changes with the project maintainer.",
+    technologies: ["Python", "SQLite", "Playwright", "OpenAI", "pytest"],
+    source: "https://github.com/CallumMackenzie/callumployed",
+  },
+  {
     name: "PullUp",
     period: "2026 · In development",
     context: "Team software project",
