@@ -1,8 +1,19 @@
 import { useEffect } from 'react';
 import { BrowserRouter, Link, Route, Routes, useLocation, useParams } from 'react-router-dom';
-import SiteHeader from './components/SiteHeader';
 import { approvedExperiences, getExperienceBySlug } from './experience';
 import HomePage from './pages/HomePage';
+
+const SiteHeader = () => (
+  <header className="site-header">
+    <Link className="wordmark" to="/#top" aria-label="Jake Yeo, back to top">Jake Yeo</Link>
+    <nav aria-label="Primary navigation">
+      <Link to="/#about">about</Link>
+      <Link to="/#experience">experience</Link>
+      <Link to="/#projects">projects</Link>
+      <Link to="/#contact">contact</Link>
+    </nav>
+  </header>
+);
 
 const RouteEffects = ({ title }: { title: string }) => {
   const location = useLocation();
@@ -81,7 +92,7 @@ const ExperienceDetailPage = () => {
           </section>
           <section aria-labelledby="technologies-title">
             <h2 id="technologies-title">Technologies</h2>
-            <ul className="tag-list" aria-label={`${experience.company} technologies`}>
+            <ul className="tech-list" aria-label={`${experience.company} technologies`}>
               {experience.technologies.map((technology) => <li key={technology}>{technology}</li>)}
             </ul>
           </section>

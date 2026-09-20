@@ -13,10 +13,10 @@ describe('portfolio routes and accessibility semantics', () => {
 
     expect(screen.getByRole('main')).toBeInTheDocument();
     expect(screen.getByRole('link', { name: /skip to main content/i })).toBeInTheDocument();
-    expect(screen.getByRole('heading', { name: /i build dependable digital products/i })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: /software developer working across web/i })).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: /ubc faculty of medicine/i })).toBeInTheDocument();
-    expect(screen.getByRole('link', { name: /explore full experience/i })).toHaveAttribute('href', '/experience');
-    expect(screen.getAllByRole('link', { name: /github/i })[0]).toHaveAttribute('rel', expect.stringContaining('noopener'));
+    expect(screen.getByRole('link', { name: /explore experience/i })).toHaveAttribute('href', '/experience');
+    expect(screen.getByRole('link', { name: /github/i })).toHaveAttribute('rel', expect.stringContaining('noopener'));
   });
 
   it('renders an accessible experience listing with whole-item links', () => {
