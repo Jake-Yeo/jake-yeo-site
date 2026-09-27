@@ -1,308 +1,181 @@
-import { useEffect } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
+import type { CSSProperties } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import Gallery from '../components/Gallery';
+import SiteHeader, { Icon } from '../components/SiteHeader';
 import { approvedExperiences } from '../experience';
+import { portfolioProjects, skillGroups, type PortfolioProject } from '../portfolioData';
 
-type Project = {
-  name: string;
-  year: string;
-  summary: string;
-  detail: string;
-  technologies: string[];
-  github: string;
-  demo?: string;
-  image: string;
-  imageAlt: string;
-};
-
-const projects: Project[] = [
-  {
-    name: "Gorilla Type",
-    year: "2024",
-    summary: "A test-driven desktop typing application built in Java.",
-    detail:
-      "Designed from user stories and UML diagrams, with persistent practice data and a comprehensive JUnit test suite covering the core typing experience.",
-    technologies: ["Java", "JUnit", "OOP", "TDD"],
-    github: "https://github.com/Jake-Yeo/GorillaType",
-    image: "/pics/gorillaType/gt00.png",
-    imageAlt: "Gorilla Type typing practice interface",
-  },
-  {
-    name: "Zen Cafe",
-    year: "2024",
-    summary: "A real-time messaging app with a shared music radio.",
-    detail:
-      "A full-stack social cafe experience with JWT authentication, MongoDB-backed messaging, and a curated audio library served for low-latency playback.",
-    technologies: ["React", "TypeScript", "Node.js", "MongoDB"],
-    github: "https://github.com/Jake-Yeo/zen-cafe",
-    demo: "https://zen-cafe.vercel.app/",
-    image: "/pics/zenCafe/zc1.png",
-    imageAlt: "Zen Cafe messaging application",
-  },
-  {
-    name: "Nova Type",
-    year: "2024",
-    summary: "A customizable typing practice platform with progress tracking.",
-    detail:
-      "Generates varied practice sessions from a large text library, tracks accuracy and speed over time, and supports user accounts and personalized settings.",
-    technologies: ["React", "TypeScript", "Firebase", "Regex"],
-    github: "https://github.com/Jake-Yeo/nova-type",
-    demo: "https://nova-type.web.app/",
-    image: "/pics/novaType/nt1.png",
-    imageAlt: "Nova Type typing test interface",
-  },
-  {
-    name: "Motis Harmony",
-    year: "2022",
-    summary: "A desktop music manager and YouTube audio scraper.",
-    detail:
-      "Combines a JavaFX music player, playlists, timers, visualization, and browser tooling with a Selenium-based audio acquisition workflow.",
-    technologies: ["Java", "JavaFX", "Selenium", "Maven"],
-    github: "https://github.com/Jake-Yeo/MotisHarmony",
-    image: "/pics/motisHarmony/mh7.png",
-    imageAlt: "Motis Harmony desktop music player",
-  },
-  {
-    name: "KeyDex",
-    year: "2021",
-    summary: "An early Java typing trainer focused on deliberate practice.",
-    detail:
-      "A desktop application exploring object-oriented design, MVC architecture, configurable exercises, and local progress tracking.",
-    technologies: ["Java", "JavaFX", "MVC", "OOP"],
-    github: "https://github.com/Jake-Yeo/KeyDex",
-    image: "/pics/keyDex/kd1.png",
-    imageAlt: "KeyDex typing application",
-  },
-];
-
-const skills = [
-  "TypeScript",
-  "JavaScript",
-  "React",
-  "Node.js",
-  "Java",
-  "Python",
-  "MongoDB",
-  "Firebase",
-];
-
-
-const recentProjects = [
-  {
-    name: "Callumployed",
-    period: "Aug–Sep 2026",
-    context: "Collaborative software project",
-    description:
-      "A local-first job-search tracker and automation tool for role discovery, company management, and application preparation.",
-    contribution:
-      "Built durable Autoprep and application-material workflows, hardened source-grounded résumé and cover-letter generation, and improved the vanilla web UI while integrating changes with the project maintainer.",
-    technologies: ["Python", "SQLite", "Playwright", "OpenAI", "pytest"],
-    source: "https://github.com/CallumMackenzie/callumployed",
-  },
-  {
-    name: "PullUp",
-    period: "2026 · In development",
-    context: "Team software project",
-    description:
-      "A full-stack social event platform for organizing pullups, inviting friends and social circles, managing RSVPs, and sharing event photos.",
-    contribution:
-      "Built major parts of the MongoDB and Express API, Redux state architecture, Auth0 flow, friend and RSVP systems, and event detail/editing experience.",
-    technologies: ["React", "TypeScript", "Redux", "Express", "MongoDB", "Auth0"],
-  },
-  {
-    name: "Sightline",
-    period: "Oct 2025",
-    context: "StormHacks 2025",
-    description:
-      "An accessibility-first PWA that gives blind and low-vision users spoken descriptions of scenes captured with their phone camera.",
-    contribution:
-      "Built the mobile and desktop camera capture experience, scene-description interface, and reusable frontend components under hackathon time constraints.",
-    technologies: ["Next.js", "TypeScript", "Gemini", "ElevenLabs", "PWA"],
-    source: "https://github.com/xuanhieu2611/Sightline",
-    demo: "https://sightline-xi.vercel.app/describe",
-  },
-  {
-    name: "Sum-Up Sundae",
-    period: "Jan 2025",
-    context: "nwHacks 2025 · Sponsor Prize winner",
-    description:
-      "A weekly video-recap platform that encourages friends to stay connected by unlocking group updates after each member contributes.",
-    contribution:
-      "Designed MongoDB models and Express APIs, integrated Livepeer upload and playback, tested endpoints with Postman, and wired group and video flows into the frontend.",
-    technologies: ["React", "Node.js", "Express", "MongoDB", "Livepeer", "Firebase"],
-    source: "https://github.com/tyin76/sum-up-sundae",
-  },
-];
+const Footer = () => (
+  <>
+    <section className="contact section" id="contact" aria-labelledby="contact-title">
+      <div className="container">
+        <div className="contact__card card">
+          <span className="contact__glow" aria-hidden="true" />
+          <p className="eyebrow">Contact</p>
+          <h2 className="contact__title" id="contact-title">Let’s build something together.</h2>
+          <p className="contact__lede">Whether it’s a role, a project, or a question about something I’ve made, my inbox is open.</p>
+          <div className="contact__actions">
+            <a className="btn btn-primary" href="mailto:jakeyeozh@gmail.com">jakeyeozh@gmail.com</a>
+            <a className="btn btn-ghost" href="https://ca.linkedin.com/in/jake-yeo" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          </div>
+        </div>
+      </div>
+    </section>
+    <footer className="container footer__bar">
+      <p className="footer__copy">© {new Date().getFullYear()} Jake Yeo. Built with React.</p>
+      <div className="footer__links">
+        <a href="https://github.com/Jake-Yeo" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><Icon name="github" /></a>
+        <a href="https://ca.linkedin.com/in/jake-yeo" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><Icon name="linkedin" /></a>
+      </div>
+    </footer>
+  </>
+);
 
 const HomePage = () => {
   const location = useLocation();
+  const [galleryProject, setGalleryProject] = useState<PortfolioProject | null>(null);
+  const galleryTriggerRef = useRef<HTMLElement | null>(null);
+  const openGallery = useCallback((project: PortfolioProject, trigger: HTMLElement) => {
+    galleryTriggerRef.current = trigger;
+    setGalleryProject(project);
+  }, []);
+  const closeGallery = useCallback(() => setGalleryProject(null), []);
 
   useEffect(() => {
-    document.title = 'Jake Yeo | Software Developer';
-    if (typeof window.scrollTo === 'function') window.scrollTo(0, 0);
-    document.querySelector<HTMLElement>('main h1')?.focus();
-  }, [location.pathname]);
+    document.title = 'Jake Yeo — Full-Stack Developer';
+    const revealItems = Array.from(document.querySelectorAll<HTMLElement>('.reveal'));
+    if (!('IntersectionObserver' in window) || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      revealItems.forEach((item) => item.classList.add('is-visible'));
+      return;
+    }
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          (entry.target as HTMLElement).classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.08 });
+    revealItems.forEach((item) => observer.observe(item));
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    const hash = location.hash;
+    if (!hash) return;
+    const timer = window.setTimeout(() => {
+      const target = document.querySelector<HTMLElement>(hash);
+      if (!target) return;
+      const previousBehavior = document.documentElement.style.scrollBehavior;
+      document.documentElement.style.scrollBehavior = 'auto';
+      target.scrollIntoView({ block: 'start' });
+      document.documentElement.style.scrollBehavior = previousBehavior;
+    }, 0);
+    return () => window.clearTimeout(timer);
+  }, [location.hash]);
 
   return (
-    <div className="site-shell">
-      <a className="skip-link" href="#main-content" onClick={() => document.getElementById('main-content')?.focus()}>
-        Skip to main content
-      </a>
-      <header className="site-header">
-        <a className="wordmark" href="#main-content" aria-label="Jake Yeo, back to top">
-          Jake Yeo
-        </a>
-        <nav aria-label="Primary navigation">
-          <a href="#about">about</a>
-          <a href="#experience">experience</a>
-          <a href="#projects">projects</a>
-          <a href="#contact">contact</a>
-        </nav>
-      </header>
-
-      <main id="main-content" tabIndex={-1}>
-        <section className="intro" id="about">
-          <p className="eyebrow">Computer science · UBC</p>
-          <h1 tabIndex={-1}>Software developer working across web, cloud, and data.</h1>
-          <p className="intro-copy">
-            I&apos;m Jake, a computer science student and full-stack developer based in
-            Vancouver. I enjoy turning ambitious ideas into clear, reliable products,
-            from web platforms to desktop tools.
-          </p>
-          <div className="intro-links">
-            <a href="mailto:jakeyeozh@gmail.com">Email me <span aria-hidden="true">↗</span></a>
-            <a href="https://github.com/Jake-Yeo/" target="_blank" rel="noopener noreferrer">
-              GitHub <span aria-hidden="true">↗</span>
-            </a>
-            <a href="https://ca.linkedin.com/in/jake-yeo" target="_blank" rel="noopener noreferrer">
-              LinkedIn <span aria-hidden="true">↗</span>
-            </a>
-          </div>
-        </section>
-
-        <section className="experience" id="experience" aria-labelledby="experience-title">
-          <div className="section-heading experience-heading">
-            <p className="eyebrow">Experience</p>
-            <h2 id="experience-title">Building production software with real users.</h2>
-            <Link className="explore-link" to="/experience">Explore experience <span aria-hidden="true">↗</span></Link>
-          </div>
-          <div className="experience-list">
-            {approvedExperiences.map((job) => (
-              <article className="experience-item" key={job.company}>
-                <div className="experience-meta">
-                  <span>{job.period}</span>
-                  <span>{job.product}</span>
-                </div>
-                <div className="experience-body">
-                  <div>
-                    <h3>{job.company}</h3>
-                    <p className="experience-role">{job.role}</p>
-                  </div>
-                  <div className="experience-detail">
-                    <p>{job.summary}</p>
-                    <ul className="experience-highlights">
-                      {job.highlights.map((highlight) => <li key={highlight}>{highlight}</li>)}
-                    </ul>
-                    <ul className="tech-list" aria-label={`${job.company} technologies`}>
-                      {job.technologies.map((technology) => <li key={technology}>{technology}</li>)}
-                    </ul>
-                  </div>
-                </div>
-              </article>
-            ))}
-          </div>
-        </section>
-
-        <section className="skills" aria-labelledby="skills-title">
-          <div className="section-heading">
-            <p className="eyebrow" id="skills-title">Working with</p>
-            <p>Tools I use to move from idea to shipped product.</p>
-          </div>
-          <ul className="skill-list">
-            {skills.map((skill) => <li key={skill}>{skill}</li>)}
-          </ul>
-        </section>
-
-        <section className="projects" id="projects" aria-labelledby="projects-title">
-          <div className="section-heading projects-heading">
-            <div>
-              <p className="eyebrow">Selected work</p>
-              <h2 id="projects-title">Projects, newest first.</h2>
+    <div>
+      <a className="skip-link" href="#main" onClick={() => document.getElementById('main')?.focus()}>Skip to content</a>
+      <SiteHeader />
+      <main id="main" tabIndex={-1}>
+        <section className="hero" id="about">
+          <div className="container hero__inner">
+            <div className="hero__copy reveal is-visible">
+              <span className="hero__status"><span className="hero__dot" /> Full-stack developer in Vancouver</span>
+              <h1 className="hero__title">Hi, I’m <span className="gradient-text">Jake.</span></h1>
+              <p className="hero__intro">I’m a Computer Science student at The University of British Columbia and a full-stack developer who enjoys building reliable products across web, cloud, data, and infrastructure.</p>
+              <div className="hero__meta">
+                <span className="hero__meta-item">⌖ Vancouver, BC</span><span>·</span><span>Full-Stack Developer · CS @ UBC</span>
+              </div>
+              <div className="hero__story">
+                <a className="hero__story-link" href="#experience">
+                  <span className="hero__story-link-text">What I’ve built and learned in industry</span>
+                  <span className="hero__story-link-arrow"><Icon name="arrow" /></span>
+                </a>
+              </div>
+              <div className="hero__actions">
+                <a className="btn btn-ghost" href="#projects">See my projects</a>
+                <a className="btn btn-ghost" href="mailto:jakeyeozh@gmail.com">Get in touch</a>
+              </div>
+              <div className="hero__socials">
+                <a href="https://github.com/Jake-Yeo" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><Icon name="github" /><span>GitHub</span></a>
+                <a href="https://ca.linkedin.com/in/jake-yeo" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><Icon name="linkedin" /><span>LinkedIn</span></a>
+                <a href="mailto:jakeyeozh@gmail.com" aria-label="Email"><span>jakeyeozh@gmail.com</span></a>
+              </div>
             </div>
-            <p>A selection of full-stack, desktop, and developer-focused work.</p>
+            <div className="hero__visual reveal is-visible">
+              <div className="hero__portrait-frame"><img className="hero__portrait" src="/pics/jake-portrait.jpg" alt="Portrait of Jake Yeo" /></div>
+              <div className="hero__badge hero__badge--top"><span className="hero__badge-label">Previously</span><span className="hero__badge-value">Software Developer Intern @ UBC</span></div>
+              <div className="hero__badge hero__badge--bottom"><span className="hero__badge-label">Hackathons</span><span className="hero__badge-value">nwHacks 2025 Sponsor Prize</span></div>
+            </div>
           </div>
+          <a className="hero__scroll" href="#experience" aria-label="Scroll to experience">↓</a>
+        </section>
 
-          <div className="recent-projects" aria-label="Recent projects">
-            {recentProjects.map((project, index) => (
-              <article className="recent-project" key={project.name}>
-                <div className="recent-project-index">{String(index + 1).padStart(2, "0")}</div>
-                <div className="recent-project-main">
-                  <div className="recent-project-title">
-                    <div>
-                      <p className="eyebrow">{project.context}</p>
-                      <h3>{project.name}</h3>
+        <section className="section" id="experience" aria-labelledby="experience-title">
+          <div className="container">
+            <header className="section-head reveal"><p className="eyebrow">Where I’ve worked</p><h2 className="section-title" id="experience-title">Experience</h2><p className="section-lede">Shipping production software across product interfaces, APIs, cloud infrastructure, data, and document generation.</p></header>
+            <div className="experience__grid">
+              <div className="experience__jobs">
+                {approvedExperiences.map((experience, index) => (
+                  <article className="experience__item card reveal" style={{ '--reveal-delay': `${index * 80}ms` } as CSSProperties} key={experience.slug}>
+                    <span className="experience__marker" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
+                    <div className="experience__header">
+                      <div><h3 className="experience__role">{experience.role}</h3><p className="experience__company"><a href={experience.companyUrl} target="_blank" rel="noopener noreferrer">{experience.company} ↗</a><span className="experience__location">{experience.location}</span></p></div>
+                      <span className="experience__period">{experience.period}</span>
                     </div>
-                    <span>{project.period}</span>
-                  </div>
-                  <div className="recent-project-content">
-                    <p>{project.description}</p>
-                    <p>{project.contribution}</p>
-                  </div>
-                  <div className="recent-project-footer">
-                    <ul className="tech-list" aria-label={`${project.name} technologies`}>
-                      {project.technologies.map((technology) => <li key={technology}>{technology}</li>)}
-                    </ul>
-                    <div className="project-links">
-                      {project.demo && <a href={project.demo} target="_blank" rel="noopener noreferrer">Live site <span aria-hidden="true">↗</span></a>}
-                      {project.source && <a href={project.source} target="_blank" rel="noopener noreferrer">Source <span aria-hidden="true">↗</span></a>}
-                    </div>
-                  </div>
-                </div>
-              </article>
-            ))}
+                    <p className="experience__summary">{experience.summary}</p>
+                    <ul className="experience__highlights">{experience.highlights.map((highlight) => <li key={highlight}>{highlight}</li>)}</ul>
+                    <ul className="experience__stack" aria-label={`${experience.company} technologies`}>{experience.technologies.map((technology) => <li className="chip" key={technology}>{technology}</li>)}</ul>
+                    <Link className="experience__story" to={`/experience/${experience.slug}`}>
+                      <span className="experience__story-text"><span className="experience__story-title">Read about {experience.duration.toLowerCase()} at {experience.company}</span><span className="experience__story-sub">Projects, stack, milestones, and lessons</span></span>
+                      <span className="experience__story-arrow"><Icon name="arrow" /></span>
+                    </Link>
+                  </article>
+                ))}
+              </div>
+              <aside className="experience__side"><article className="experience__edu card reveal"><p className="eyebrow">Education</p><h3 className="experience__edu-degree">B.Sc. Computer Science</h3><p className="experience__edu-school">The University of British Columbia</p><span className="experience__location">Vancouver, BC</span></article></aside>
+            </div>
           </div>
+        </section>
 
-          <p className="archive-label eyebrow">Earlier work</p>
+        <section className="section" id="skills" aria-labelledby="skills-title">
+          <div className="container">
+            <header className="section-head reveal"><p className="eyebrow">Toolkit</p><h2 className="section-title" id="skills-title">Skills</h2><p className="section-lede">The languages, frameworks, platforms, and tools I reach for most across the stack.</p></header>
+            <div className="skills__grid">{skillGroups.map((group, index) => <article className="skills__group card reveal" key={group.title} style={{ '--reveal-delay': `${index * 80}ms` } as CSSProperties}><span className="skills__index">{String(index + 1).padStart(2, '0')}</span><h3 className="skills__title">{group.title}</h3><p className="skills__blurb">{group.blurb}</p><ul className="skills__list">{group.skills.map((skill) => <li className="chip skills__chip" key={skill}>{skill}</li>)}</ul></article>)}</div>
+          </div>
+        </section>
 
-          <div className="project-list">
-            {projects.map((project, index) => (
-              <article className="project" key={project.name}>
-                <div className="project-media">
-                  <img src={project.image} alt={project.imageAlt} loading={index > 1 ? "lazy" : "eager"} />
-                </div>
-                <div className="project-copy">
-                  <div className="project-meta">
-                    <span>{String(index + 1).padStart(2, "0")}</span>
-                    <span>{project.year}</span>
+        <section className="section" id="projects" aria-labelledby="projects-title">
+          <div className="container">
+            <header className="section-head reveal"><p className="eyebrow">Selected work</p><h2 className="section-title" id="projects-title">Projects</h2><p className="section-lede">Things I’ve built with teams and independently. Click any cover to browse the screenshots.</p></header>
+            <div className="projects__grid">
+              {portfolioProjects.map((project, index) => (
+                <article className={`project card reveal ${project.featured ? 'project--featured' : ''}`} key={project.name} style={{ '--reveal-delay': `${(index % 2) * 80}ms` } as CSSProperties}>
+                  <button type="button" className="project__cover" aria-label={`Open ${project.name} screenshots`} onClick={(event) => openGallery(project, event.currentTarget)}>
+                    <img src={project.images[0]} alt="" loading={index < 2 ? 'eager' : 'lazy'} style={{ objectPosition: project.coverPosition || 'top center' }} />
+                    <span className="project__cover-hint">▧ {project.images.length} screenshots</span>
+                  </button>
+                  <div className="project__body">
+                    <div className="project__top"><h3 className="project__name">{project.name}<span className="project__year">{project.year}</span></h3>{project.award && <span className="project__award">♜ {project.award}</span>}</div>
+                    <p className="project__tagline">{project.tagline}</p><p className="project__description">{project.description}</p>
+                    <ul className="project__stack" aria-label={`${project.name} technology stack`}>{project.technologies.map((technology) => <li className="chip" key={technology}>{technology}</li>)}</ul>
+                    <div className="project__links">{project.links.map((link) => <a className="btn btn-ghost btn-sm" key={link.label} href={link.href} target="_blank" rel="noopener noreferrer">{link.label} ↗</a>)}<button type="button" className="project__gallery-btn" onClick={(event) => openGallery(project, event.currentTarget)}>View screenshots →</button></div>
                   </div>
-                  <h3>{project.name}</h3>
-                  <p className="project-summary">{project.summary}</p>
-                  <p className="project-detail">{project.detail}</p>
-                  <ul className="tech-list" aria-label={`${project.name} technologies`}>
-                    {project.technologies.map((technology) => <li key={technology}>{technology}</li>)}
-                  </ul>
-                  <div className="project-links">
-                    {project.demo && (
-                      <a href={project.demo} target="_blank" rel="noopener noreferrer">Live site <span aria-hidden="true">↗</span></a>
-                    )}
-                    <a href={project.github} target="_blank" rel="noopener noreferrer">Source <span aria-hidden="true">↗</span></a>
-                  </div>
-                </div>
-              </article>
-            ))}
+                </article>
+              ))}
+            </div>
+            <div className="projects__more reveal"><span>More course projects, experiments, and earlier work live on GitHub.</span><a className="btn btn-ghost btn-sm" href="https://github.com/Jake-Yeo" target="_blank" rel="noopener noreferrer">github.com/Jake-Yeo ↗</a></div>
           </div>
         </section>
       </main>
-
-      <footer id="contact">
-        <div>
-          <p className="eyebrow">Let&apos;s connect</p>
-          <h2>Have a project or opportunity in mind?</h2>
-        </div>
-        <a className="contact-link" href="mailto:jakeyeozh@gmail.com">jakeyeozh@gmail.com <span aria-hidden="true">↗</span></a>
-        <p className="copyright">© {new Date().getFullYear()} Jake Yeo</p>
-      </footer>
+      <Footer />
+      {galleryProject && <Gallery project={galleryProject.name} images={galleryProject.images} onClose={closeGallery} returnFocusTo={galleryTriggerRef.current} />}
     </div>
   );
 };
 
+export { Footer };
 export default HomePage;
