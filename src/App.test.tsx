@@ -19,6 +19,17 @@ describe('portfolio routes and interactions', () => {
     expect(screen.getAllByRole('link', { name: /github/i })[0]).toHaveAttribute('rel', expect.stringContaining('noopener'));
   });
 
+  it('renders a branded icon for every skill and a circular portrait hook', () => {
+    renderAt('/');
+    const skillChips = document.querySelectorAll('#skills .skills__chip');
+    expect(skillChips).toHaveLength(27);
+    skillChips.forEach((chip) => {
+      expect(chip.querySelector('.tech-logo')).toBeInTheDocument();
+    });
+    expect(document.querySelector('.hero__portrait-frame')).toBeInTheDocument();
+    expect(document.querySelector('.hero__portrait')).toBeInTheDocument();
+  });
+
   it('offers exactly two detailed jobs in the experience dropdown', () => {
     renderAt('/');
     const menu = screen.getByLabelText(/experience pages/i);

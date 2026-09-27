@@ -3,6 +3,7 @@ import type { CSSProperties } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import Gallery from '../components/Gallery';
 import SiteHeader, { Icon } from '../components/SiteHeader';
+import TechIcon from '../components/TechIcon';
 import { approvedExperiences } from '../experience';
 import { portfolioProjects, skillGroups, type PortfolioProject } from '../portfolioData';
 
@@ -144,7 +145,7 @@ const HomePage = () => {
         <section className="section" id="skills" aria-labelledby="skills-title">
           <div className="container">
             <header className="section-head reveal"><p className="eyebrow">Toolkit</p><h2 className="section-title" id="skills-title">Skills</h2><p className="section-lede">The languages, frameworks, platforms, and tools I reach for most across the stack.</p></header>
-            <div className="skills__grid">{skillGroups.map((group, index) => <article className="skills__group card reveal" key={group.title} style={{ '--reveal-delay': `${index * 80}ms` } as CSSProperties}><span className="skills__index">{String(index + 1).padStart(2, '0')}</span><h3 className="skills__title">{group.title}</h3><p className="skills__blurb">{group.blurb}</p><ul className="skills__list">{group.skills.map((skill) => <li className="chip skills__chip" key={skill}>{skill}</li>)}</ul></article>)}</div>
+            <div className="skills__grid">{skillGroups.map((group, index) => <article className="skills__group card reveal" key={group.title} style={{ '--reveal-delay': `${index * 80}ms` } as CSSProperties}><span className="skills__index">{String(index + 1).padStart(2, '0')}</span><h3 className="skills__title">{group.title}</h3><p className="skills__blurb">{group.blurb}</p><ul className="skills__list">{group.skills.map((skill) => <li className="chip skills__chip skills__chip--logo" key={skill}><TechIcon skill={skill} />{skill}</li>)}</ul></article>)}</div>
           </div>
         </section>
 
