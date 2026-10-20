@@ -43,6 +43,13 @@ describe('portfolio routes and interactions', () => {
     expect(links[1]).toHaveAttribute('href', '/experience/invoke-media');
   });
 
+  it('labels the top hero status as software developer', () => {
+    renderAt('/');
+    const heroStatus = document.querySelector('.hero__status');
+    expect(heroStatus).toHaveTextContent(/^software developer$/i);
+    expect(heroStatus).not.toHaveTextContent(/vancouver|full-stack/i);
+  });
+
   it('renders the four-month Invoke detail page with all case-study sections', () => {
     renderAt('/experience/invoke-media');
     const heading = screen.getByRole('heading', { name: /four months at invoke media/i, level: 1 });

@@ -83,7 +83,7 @@ const HomePage = () => {
         <section className="hero" id="about">
           <div className="container hero__inner">
             <div className="hero__copy reveal is-visible">
-              <span className="hero__status"><span className="hero__dot" /> Full-stack developer in Vancouver</span>
+              <span className="hero__status"><span className="hero__dot" /> Software developer</span>
               <h1 className="hero__name">Jake Yeo</h1>
               <p className="hero__title">Hi, I’m Jake.</p>
               <p className="hero__intro">I’m a Computer Science student at The University of British Columbia and a full-stack developer who enjoys building reliable products across web, cloud, data, and infrastructure.</p>
