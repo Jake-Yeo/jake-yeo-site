@@ -12,7 +12,6 @@ const Footer = () => (
     <section className="contact section" id="contact" aria-labelledby="contact-title">
       <div className="container">
         <div className="contact__card card">
-          <span className="contact__glow" aria-hidden="true" />
           <p className="eyebrow">Contact</p>
           <h2 className="contact__title" id="contact-title">Let’s build something together.</h2>
           <p className="contact__lede">Whether it’s a role, a project, or a question about something I’ve made, my inbox is open.</p>
@@ -77,7 +76,7 @@ const HomePage = () => {
   }, [location.hash]);
 
   return (
-    <div>
+    <div className="home-page">
       <a className="skip-link" href="#main" onClick={() => document.getElementById('main')?.focus()}>Skip to content</a>
       <SiteHeader />
       <main id="main" tabIndex={-1}>
@@ -85,7 +84,8 @@ const HomePage = () => {
           <div className="container hero__inner">
             <div className="hero__copy reveal is-visible">
               <span className="hero__status"><span className="hero__dot" /> Full-stack developer in Vancouver</span>
-              <h1 className="hero__title">Hi, I’m <span className="gradient-text">Jake.</span></h1>
+              <h1 className="hero__name">Jake Yeo</h1>
+              <p className="hero__title">Hi, I’m Jake.</p>
               <p className="hero__intro">I’m a Computer Science student at The University of British Columbia and a full-stack developer who enjoys building reliable products across web, cloud, data, and infrastructure.</p>
               <div className="hero__meta">
                 <span className="hero__meta-item">⌖ Vancouver, BC</span><span>·</span><span>Full-Stack Developer · CS @ UBC</span>
@@ -107,9 +107,11 @@ const HomePage = () => {
               </div>
             </div>
             <div className="hero__visual reveal is-visible">
-              <div className="hero__portrait-frame"><img className="hero__portrait" src="/pics/jake-portrait.jpg" alt="Portrait of Jake Yeo" /></div>
-              <div className="hero__badge hero__badge--top"><span className="hero__badge-label">Previously</span><span className="hero__badge-value">Software Developer Intern @ UBC</span></div>
-              <div className="hero__badge hero__badge--bottom"><span className="hero__badge-label">Hackathons</span><span className="hero__badge-value">nwHacks 2025 Sponsor Prize</span></div>
+              <div className="hero__portrait-frame"><img className="hero__portrait" src="/pics/jakePhotoWithBg.JPG" alt="Portrait of Jake Yeo" /></div>
+              <div className="hero__portrait-notes">
+                <p><span>Previously</span>Software Developer Intern @ UBC</p>
+                <p><span>Hackathons</span>nwHacks 2025 Sponsor Prize</p>
+              </div>
             </div>
           </div>
           <a className="hero__scroll" href="#experience" aria-label="Scroll to experience">↓</a>

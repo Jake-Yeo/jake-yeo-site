@@ -12,25 +12,29 @@ describe('portfolio routes and interactions', () => {
     renderAt('/');
     expect(screen.getByRole('main')).toBeInTheDocument();
     expect(screen.getByRole('link', { name: /skip to content/i })).toBeInTheDocument();
-    expect(screen.getByRole('heading', { name: /hi, i’m jake/i })).toBeInTheDocument();
+    expect(screen.getByText(/^Hi, I’m Jake\.$/)).toBeInTheDocument();
     expect(screen.getByText(/eight-month full-stack internship/i)).toBeInTheDocument();
     expect(screen.getByText(/four-month internship/i)).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: /sum-up sundae/i })).toBeInTheDocument();
     expect(screen.getAllByRole('link', { name: /github/i })[0]).toHaveAttribute('rel', expect.stringContaining('noopener'));
   });
 
-  it('renders a branded icon for every skill and a circular portrait hook', () => {
+  it('renders the new identity-led hero, rail navigation, skill icons, and portrait', () => {
     renderAt('/');
+    expect(screen.getByRole('heading', { name: 'Jake Yeo', level: 1 })).toBeInTheDocument();
+    expect(document.querySelector('.site-rail')).toBeInTheDocument();
     const skillChips = document.querySelectorAll('#skills .skills__chip');
     expect(skillChips).toHaveLength(27);
     skillChips.forEach((chip) => {
       expect(chip.querySelector('.tech-logo')).toBeInTheDocument();
     });
     expect(document.querySelector('.hero__portrait-frame')).toBeInTheDocument();
-    expect(document.querySelector('.hero__portrait')).toBeInTheDocument();
+    const portrait = document.querySelector('.hero__portrait');
+    expect(portrait).toBeInTheDocument();
+    expect(portrait).toHaveAttribute('src', '/pics/jakePhotoWithBg.JPG');
   });
 
-  it('offers exactly two detailed jobs in the experience dropdown', () => {
+  it('offers exactly two detailed jobs in the experience rail', () => {
     renderAt('/');
     const menu = screen.getByLabelText(/experience pages/i);
     const links = within(menu).getAllByRole('link');

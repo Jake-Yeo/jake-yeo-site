@@ -14,8 +14,6 @@ const RouteEffects = ({ title }: { title: string }) => {
   return null;
 };
 
-const colors = ['purple', 'turquoise', 'carmine', 'mustard', 'spring'] as const;
-
 const SectionHeading = ({ eyebrow, title, id }: { eyebrow: string; title: string; id: string }) => (
   <header className="section-head"><p className="eyebrow">{eyebrow}</p><h2 className="section-title" id={id}>{title}</h2></header>
 );
@@ -38,22 +36,22 @@ const ExperienceDetailPage = () => {
           <div className="story-hero__grid">
             <div className="story-hero__copy">
               <p className="eyebrow">{experience.period}</p>
-              <h1 className="story-hero__title" tabIndex={-1}>{experience.duration} at <span className="gradient-text">{experience.company}</span></h1>
+              <h1 className="story-hero__title" tabIndex={-1}>{experience.duration} at <span className="story-hero__company-name">{experience.company}</span></h1>
               <p className="story-hero__blurb">{experience.summary}</p>
               <div className="story-hero__meta"><span>{experience.role}</span><span>·</span><span>{experience.location}</span><span>·</span><span>{experience.product}</span></div>
-              <ul className="story-tags">{experience.technologies.map((technology, index) => <li className={`story-tag story-tag--${(index % 5) + 1}`} key={technology}>{technology}</li>)}</ul>
+              <ul className="story-tags">{experience.technologies.map((technology) => <li className="story-tag" key={technology}>{technology}</li>)}</ul>
             </div>
-            <aside className="story-toc card"><div className="story-toc__head"><span className="nav__logo-mark" aria-hidden="true">JY</span><p className="eyebrow">On this page</p></div><ol>{toc.map(([href, label], index) => <li key={href}><a className="story-toc__link" href={`#${href}`}><span className="story-toc__num">{String(index + 1).padStart(2, '0')}</span><span>{label}</span><span>→</span></a></li>)}</ol></aside>
+            <aside className="story-toc"><div className="story-toc__head"><p className="eyebrow">On this page</p></div><ol>{toc.map(([href, label], index) => <li key={href}><a className="story-toc__link" href={`#${href}`}><span className="story-toc__num">{String(index + 1).padStart(2, '0')}</span><span>{label}</span><span>→</span></a></li>)}</ol></aside>
           </div>
         </section>
 
-        <section className="story-section container" id="story-features"><SectionHeading eyebrow="The big ones" title="Work I’m proudest of" id="features-title" /><div className="story-features">{experience.features.map((feature, index) => <article className={`story-feature card accent-${colors[index % colors.length]}`} key={feature.title}><div><h3>{feature.title}</h3><p>{feature.text}</p><ul>{feature.technologies.map((technology) => <li className="chip" key={technology}>{technology}</li>)}</ul></div><div className="story-feature__index">0{index + 1}</div></article>)}</div></section>
+        <section className="story-section container" id="story-features"><SectionHeading eyebrow="The big ones" title="Work I’m proudest of" id="features-title" /><div className="story-features">{experience.features.map((feature, index) => <article className="story-feature card" key={feature.title}><div><h3>{feature.title}</h3><p>{feature.text}</p><ul>{feature.technologies.map((technology) => <li className="chip" key={technology}>{technology}</li>)}</ul></div><div className="story-feature__index">0{index + 1}</div></article>)}</div></section>
 
-        <section className="story-section container" id="story-shipped"><SectionHeading eyebrow="Shipped" title="What went out the door" id="shipped-title" /><div className="story-launches">{experience.launches.map((launch, index) => <article className={`story-launch card accent-${colors[index % colors.length]}`} key={launch.title}><span>{launch.category}</span><h3>{launch.title}</h3><p>{launch.description}</p></article>)}</div></section>
+        <section className="story-section container" id="story-shipped"><SectionHeading eyebrow="Shipped" title="What went out the door" id="shipped-title" /><div className="story-launches">{experience.launches.map((launch) => <article className="story-launch card" key={launch.title}><span>{launch.category}</span><h3>{launch.title}</h3><p>{launch.description}</p></article>)}</div></section>
 
-        <section className="story-section container" id="story-stack"><SectionHeading eyebrow="Tech stack" title="What I built it with" id="stack-title" /><div className="story-stack">{experience.layers.map((layer, index) => <article className={`story-layer card accent-${colors[index % colors.length]}`} key={layer.name}><div><span>0{index + 1}</span><h3>{layer.name}</h3><p>{layer.description}</p></div><ul>{layer.technologies.map((technology) => <li className="chip" key={technology}>{technology}</li>)}</ul></article>)}</div></section>
+        <section className="story-section container" id="story-stack"><SectionHeading eyebrow="Tech stack" title="What I built it with" id="stack-title" /><div className="story-stack">{experience.layers.map((layer, index) => <article className="story-layer card" key={layer.name}><div><span>0{index + 1}</span><h3>{layer.name}</h3><p>{layer.description}</p></div><ul>{layer.technologies.map((technology) => <li className="chip" key={technology}>{technology}</li>)}</ul></article>)}</div></section>
 
-        <section className="story-section container" id="story-timeline"><SectionHeading eyebrow="Timeline" title={`${experience.duration}, milestone by milestone`} id="timeline-title" /><ol className="story-timeline">{experience.milestones.map((milestone, index) => <li className={`story-milestone accent-${colors[index % colors.length]}`} key={milestone.title}><span>{milestone.when}</span><h3>{milestone.title}</h3><p>{milestone.description}</p></li>)}</ol></section>
+        <section className="story-section container" id="story-timeline"><SectionHeading eyebrow="Timeline" title={`${experience.duration}, milestone by milestone`} id="timeline-title" /><ol className="story-timeline">{experience.milestones.map((milestone) => <li className="story-milestone" key={milestone.title}><span>{milestone.when}</span><h3>{milestone.title}</h3><p>{milestone.description}</p></li>)}</ol></section>
 
         <section className="story-section container" id="story-lessons"><SectionHeading eyebrow="Reflection" title="Things I learned" id="lessons-title" /><div className="story-lessons">{experience.lessons.map((lesson, index) => <article className="story-lesson card" key={lesson.title}><span>{String(index + 1).padStart(2, '0')}</span><h3>{lesson.title}</h3><p>{lesson.description}</p></article>)}</div></section>
 

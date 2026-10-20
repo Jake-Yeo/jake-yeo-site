@@ -12,7 +12,22 @@ const Icon = ({ name }: { name: 'github' | 'linkedin' | 'menu' | 'close' | 'chev
     chevron: <><path d="m8 10 4 4 4-4" /></>,
     arrow: <><path d="M5 12h14M13 6l6 6-6 6" /></>,
   };
-  return <svg viewBox="0 0 24 24" width="1em" height="1em" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">{paths[name]}</svg>;
+
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      width="1em"
+      height="1em"
+      aria-hidden="true"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      {paths[name]}
+    </svg>
+  );
 };
 
 const homeHref = (hash: string, onHome: boolean) => onHome ? hash : `/${hash}`;
@@ -20,8 +35,6 @@ const homeHref = (hash: string, onHome: boolean) => onHome ? hash : `/${hash}`;
 const SiteHeader = () => {
   const location = useLocation();
   const [open, setOpen] = useState(false);
-  const [experienceOpen, setExperienceOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
   const onHome = location.pathname === '/';
   const onExperience = location.pathname.startsWith('/experience');
 
@@ -29,75 +42,69 @@ const SiteHeader = () => {
     setOpen(false);
   }, [location.pathname]);
 
-  useEffect(() => {
-    const update = () => setScrolled(window.scrollY > 12);
-    update();
-    window.addEventListener('scroll', update, { passive: true });
-    return () => window.removeEventListener('scroll', update);
-  }, []);
+  const closeMenu = () => setOpen(false);
 
   return (
-    <header className={`nav ${scrolled ? 'nav--scrolled' : ''}`}>
-      <div className="container nav__inner">
-        <Link className="nav__brand" to="/" aria-label="Jake Yeo, home">
-          <span className="nav__logo-mark" aria-hidden="true">JY</span>
-          <span className="nav__name">Jake Yeo</span>
-        </Link>
+    <header className="nav">
+      <div className="site-rail">
+        <div>
+          <Link className="nav__brand" to="/" aria-label="Jake Yeo, home">
+            <span className="nav__name">Jake Yeo</span>
+          </Link>
+          <p className="nav__role">Full-stack developer in Vancouver</p>
+        </div>
+
         <nav className="nav__links" aria-label="Primary navigation">
           <a className={`nav__link ${onHome ? 'is-active' : ''}`} href={homeHref('#about', onHome)}>About</a>
-          <div
-            className={`nav__item nav__item--has-menu ${experienceOpen ? 'is-open' : ''}`}
-            onMouseEnter={() => setExperienceOpen(true)}
-            onMouseLeave={() => setExperienceOpen(false)}
-            onFocus={() => setExperienceOpen(true)}
-            onBlur={(event) => {
-              if (!event.currentTarget.contains(event.relatedTarget as Node | null)) setExperienceOpen(false);
-            }}
-          >
-            <a className={`nav__link ${onExperience ? 'is-active' : ''}`} href={homeHref('#experience', onHome)}>
-              Experience <span className="nav__chevron"><Icon name="chevron" /></span>
-            </a>
-            <div className="nav__menu">
-              <div className="nav__menu-panel" aria-label="Experience pages">
-                {approvedExperiences.map((experience) => (
-                  <Link className="nav__menu-item" key={experience.slug} to={`/experience/${experience.slug}`}>
-                    <span className="nav__menu-dot" aria-hidden="true" />
-                    <span className="nav__menu-text">
-                      <span className="nav__menu-title">{experience.duration} at {experience.company}</span>
-                      <span className="nav__menu-sub">{experience.role} · {experience.period}</span>
-                    </span>
-                    <span className="nav__menu-arrow"><Icon name="arrow" /></span>
-                  </Link>
-                ))}
-              </div>
-            </div>
+          <a className={`nav__link ${onExperience ? 'is-active' : ''}`} href={homeHref('#experience', onHome)}>Experience</a>
+          <div className="nav__experience-links" aria-label="Experience pages">
+            {approvedExperiences.map((experience) => (
+              <Link className="nav__experience-link" key={experience.slug} to={`/experience/${experience.slug}`}>
+                <span>{experience.duration} at</span>
+                <strong>{experience.company}</strong>
+              </Link>
+            ))}
           </div>
           <a className="nav__link" href={homeHref('#skills', onHome)}>Skills</a>
           <a className="nav__link" href={homeHref('#projects', onHome)}>Projects</a>
           <a className="nav__link" href="#contact">Contact</a>
         </nav>
-        <div className="nav__actions">
-          <a className="nav__icon" href="https://github.com/Jake-Yeo" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><Icon name="github" /></a>
-          <a className="nav__icon" href="https://ca.linkedin.com/in/jake-yeo" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><Icon name="linkedin" /></a>
-          <a className="btn btn-primary btn-sm nav__cta" href="mailto:jakeyeozh@gmail.com">Get in touch</a>
-          <button className="nav__toggle" type="button" aria-label={open ? 'Close menu' : 'Open menu'} aria-expanded={open} onClick={() => setOpen((value) => !value)}>
-            <Icon name={open ? 'close' : 'menu'} />
-          </button>
+
+        <div className="nav__rail-footer">
+          <a className="nav__email" href="mailto:jakeyeozh@gmail.com">Get in touch</a>
+          <div className="nav__socials">
+            <a href="https://github.com/Jake-Yeo" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><Icon name="github" /></a>
+            <a href="https://ca.linkedin.com/in/jake-yeo" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><Icon name="linkedin" /></a>
+          </div>
         </div>
       </div>
+
+      <div className="nav__mobilebar">
+        <Link className="nav__mobile-brand" to="/" aria-label="Jake Yeo, home">Jake Yeo</Link>
+        <button
+          className="nav__toggle"
+          type="button"
+          aria-label={open ? 'Close menu' : 'Open menu'}
+          aria-expanded={open}
+          onClick={() => setOpen((value) => !value)}
+        >
+          <Icon name={open ? 'close' : 'menu'} />
+        </button>
+      </div>
+
       <div className={`nav__mobile ${open ? 'is-open' : ''}`}>
-        <nav className="container nav__mobile-inner" aria-label="Mobile navigation">
-          <a className="nav__mobile-link" href="/#about">About</a>
-          <a className={`nav__mobile-link ${onExperience ? 'is-active' : ''}`} href="/#experience">Experience</a>
+        <nav className="nav__mobile-inner" aria-label="Mobile navigation">
+          <a className="nav__mobile-link" href="/#about" onClick={closeMenu}>About</a>
+          <a className={`nav__mobile-link ${onExperience ? 'is-active' : ''}`} href="/#experience" onClick={closeMenu}>Experience</a>
           {approvedExperiences.map((experience) => (
-            <Link className="nav__mobile-link nav__mobile-link--sub" key={experience.slug} to={`/experience/${experience.slug}`}>
+            <Link className="nav__mobile-link nav__mobile-link--sub" key={experience.slug} to={`/experience/${experience.slug}`} onClick={closeMenu}>
               {experience.duration} at {experience.company}
             </Link>
           ))}
-          <a className="nav__mobile-link" href="/#skills">Skills</a>
-          <a className="nav__mobile-link" href="/#projects">Projects</a>
-          <a className="nav__mobile-link" href="#contact">Contact</a>
-          <a className="btn btn-primary nav__mobile-cta" href="mailto:jakeyeozh@gmail.com">Get in touch</a>
+          <a className="nav__mobile-link" href="/#skills" onClick={closeMenu}>Skills</a>
+          <a className="nav__mobile-link" href="/#projects" onClick={closeMenu}>Projects</a>
+          <a className="nav__mobile-link" href="#contact" onClick={closeMenu}>Contact</a>
+          <a className="nav__mobile-cta" href="mailto:jakeyeozh@gmail.com">Get in touch</a>
         </nav>
       </div>
     </header>
