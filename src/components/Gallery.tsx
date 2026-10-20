@@ -71,16 +71,16 @@ const Gallery = ({ project, images, initialIndex = 0, onClose, returnFocusTo }: 
             <h2 className="gallery__title" id="gallery-title">{project}</h2>
             <p className="gallery__counter">{index + 1} / {images.length}</p>
           </div>
-          <button ref={closeRef} type="button" className="gallery__icon-btn" onClick={onClose} aria-label="Close screenshots">×</button>
+          <button ref={closeRef} type="button" className="gallery__icon-btn" onClick={onClose} aria-label="Close image viewer">×</button>
         </header>
         <div className="gallery__stage">
-          {images.length > 1 && <button type="button" className="gallery__nav gallery__nav--prev" onClick={previous} aria-label="Previous screenshot">‹</button>}
+          {images.length > 1 && <button type="button" className="gallery__nav gallery__nav--prev" onClick={previous} aria-label="Previous image">‹</button>}
           <img className="gallery__image" src={images[index]} alt={`${project} screenshot ${index + 1} of ${images.length}`} />
-          {images.length > 1 && <button type="button" className="gallery__nav gallery__nav--next" onClick={next} aria-label="Next screenshot">›</button>}
+          {images.length > 1 && <button type="button" className="gallery__nav gallery__nav--next" onClick={next} aria-label="Next image">›</button>}
         </div>
-        <div className="gallery__thumbs" aria-label={`${project} screenshots`}>
+        <div className="gallery__thumbs" aria-label={`${project} image selection`}>
           {images.map((image, imageIndex) => (
-            <button key={image} type="button" className={`gallery__thumb ${imageIndex === index ? 'is-active' : ''}`} onClick={() => setIndex(imageIndex)} aria-label={`Show screenshot ${imageIndex + 1}`} aria-current={imageIndex === index ? 'true' : undefined}>
+            <button key={image} type="button" className={`gallery__thumb ${imageIndex === index ? 'is-active' : ''}`} onClick={() => setIndex(imageIndex)} aria-label={`Show image ${imageIndex + 1}`} aria-current={imageIndex === index ? 'true' : undefined}>
               <img src={image} alt="" />
             </button>
           ))}

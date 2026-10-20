@@ -1,4 +1,3 @@
-export type ExperienceStat = { value: string; label: string; detail: string };
 export type ExperienceFeature = { title: string; text: string; technologies: readonly string[] };
 export type ExperienceLaunch = { category: string; title: string; description: string };
 export type ExperienceLayer = { name: string; description: string; technologies: readonly string[] };
@@ -17,7 +16,6 @@ export type ApprovedExperience = {
   summary: string;
   highlights: readonly string[];
   technologies: readonly string[];
-  stats: readonly ExperienceStat[];
   features: readonly ExperienceFeature[];
   launches: readonly ExperienceLaunch[];
   layers: readonly ExperienceLayer[];
@@ -43,12 +41,6 @@ export const approvedExperiences: readonly ApprovedExperience[] = [
       'Worked across React, GraphQL, PostgreSQL, institutional authentication, and cloud infrastructure in a three-developer team.',
     ],
     technologies: ['React', 'JavaScript', 'Python', 'GraphQL', 'PostgreSQL', 'AWS', 'Docker'],
-    stats: [
-      { value: '8', label: 'Months', detail: 'May through December 2025' },
-      { value: '353', label: 'Non-merge commits', detail: 'Across the available private-repository history' },
-      { value: '3', label: 'Developers', detail: 'On the Faculty360 product team' },
-      { value: '20–50', label: 'Pages', detail: 'In the academic documents the system produced' },
-    ],
     features: [
       {
         title: 'Configurable document builder',
@@ -82,7 +74,7 @@ export const approvedExperiences: readonly ApprovedExperience[] = [
       { category: 'Product', title: 'Responsive feedback states', description: 'Improved loading, notifications, errors, navigation, and responsive behavior.' },
     ],
     layers: [
-      { name: 'Front end', description: 'Document authoring, faculty profiles, previews, modals, and application feedback.', technologies: ['React', 'JavaScript', 'HTML/CSS', 'dnd-kit', 'CodeMirror'] },
+      { name: 'Client interfaces', description: 'Document authoring, faculty profiles, previews, modals, and application feedback.', technologies: ['React', 'JavaScript', 'HTML/CSS', 'dnd-kit', 'CodeMirror'] },
       { name: 'Data and APIs', description: 'Faculty records, configurable transformations, and application workflows.', technologies: ['GraphQL', 'AppSync', 'PostgreSQL', 'SQL', 'AlaSQL'] },
       { name: 'Document engine', description: 'Template parsing and generation of large PDF and DOCX artifacts.', technologies: ['Python', 'Docker', 'Gotenberg', 'Adobe PDF Services', 'LaTeX'] },
       { name: 'Cloud and identity', description: 'Authentication, storage, compute, deployment, and environment configuration.', technologies: ['AWS Lambda', 'S3', 'Cognito', 'Amplify', 'CDK', 'OIDC'] },
@@ -118,12 +110,6 @@ export const approvedExperiences: readonly ApprovedExperience[] = [
       'Recovered a drifted AWS environment independently before a CEO-led product demonstration.',
     ],
     technologies: ['TypeScript', 'Next.js', 'Python', 'GraphQL', 'AWS Lambda', 'FFmpeg'],
-    stats: [
-      { value: '4', label: 'Months', detail: 'January through April 2025' },
-      { value: '2', label: 'Products', detail: 'Chunks Chunks Chunks and TrueLoyalty' },
-      { value: '5', label: 'Team members', detail: 'The full software delivery team, including Jake' },
-      { value: '1', label: 'Demo recovered', detail: 'A drifted AWS environment restored before an executive demo' },
-    ],
     features: [
       {
         title: 'Large-video upload pipeline',
@@ -157,7 +143,7 @@ export const approvedExperiences: readonly ApprovedExperience[] = [
       { category: 'Frontend', title: 'TrueLoyalty prototype', description: 'Built responsive guest, table, loyalty-tier, and sorting interfaces.' },
     ],
     layers: [
-      { name: 'Front end', description: 'Upload, playback, guest, table, and loyalty interfaces.', technologies: ['React', 'Next.js', 'TypeScript', 'Figma'] },
+      { name: 'Client interfaces', description: 'Upload, playback, guest, table, and loyalty interfaces.', technologies: ['React', 'Next.js', 'TypeScript', 'Figma'] },
       { name: 'APIs and events', description: 'Application workflows linking the browser to cloud processing.', technologies: ['GraphQL', 'AppSync', 'Auth0', 'S3 Events'] },
       { name: 'Media engine', description: 'Normalization, segmentation, parallel clipping, streaming, and downloads.', technologies: ['Python', 'FFmpeg', 'HLS', 'PyTest'] },
       { name: 'Infrastructure', description: 'Storage, Lambda processing, deployment configuration, and incident recovery.', technologies: ['AWS Lambda', 'Amazon S3', 'YAML', 'CI/CD'] },

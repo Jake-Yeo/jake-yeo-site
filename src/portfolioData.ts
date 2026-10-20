@@ -85,12 +85,12 @@ export const skillGroups = [
     skills: ['TypeScript', 'JavaScript', 'Python', 'Java', 'SQL', 'HTML', 'CSS'],
   },
   {
-    title: 'Frameworks & libraries',
+    title: 'Application building blocks',
     blurb: 'Frontend, backend, testing, and product building blocks.',
     skills: ['React', 'Next.js', 'Redux Toolkit', 'Node.js', 'Express', 'Material UI', 'Tailwind', 'GraphQL', 'PyTest', 'Mocha'],
   },
   {
-    title: 'Tools & platforms',
+    title: 'Infrastructure and workflow',
     blurb: 'Cloud, data, media, deployment, and day-to-day workflow.',
     skills: ['AWS', 'PostgreSQL', 'MongoDB', 'Firebase', 'Docker', 'FFmpeg', 'Git', 'GitHub', 'Auth0', 'Figma'],
   },
