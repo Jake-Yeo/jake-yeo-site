@@ -24,7 +24,7 @@ const ExperienceDetailPage = () => {
   const experience = getExperienceBySlug(useParams().slug);
   if (!experience) return <UnknownRoutePage experienceRoute />;
   const toc = [
-    ['story-numbers', 'By the numbers'], ['story-features', 'Work I’m proudest of'], ['story-shipped', 'What went out the door'],
+    ['story-features', 'Work I’m proudest of'], ['story-shipped', 'What went out the door'],
     ['story-stack', 'Tech stack'], ['story-timeline', 'Timeline'], ['story-lessons', 'Things I learned'],
   ];
 
@@ -46,8 +46,6 @@ const ExperienceDetailPage = () => {
             <aside className="story-toc card"><div className="story-toc__head"><span className="nav__logo-mark" aria-hidden="true">JY</span><p className="eyebrow">On this page</p></div><ol>{toc.map(([href, label], index) => <li key={href}><a className="story-toc__link" href={`#${href}`}><span className="story-toc__num">{String(index + 1).padStart(2, '0')}</span><span>{label}</span><span>→</span></a></li>)}</ol></aside>
           </div>
         </section>
-
-        <section className="story-section container" id="story-numbers"><SectionHeading eyebrow="By the numbers" title={`What ${experience.duration.toLowerCase()} adds up to`} id="numbers-title" /><div className="story-stats">{experience.stats.map((stat, index) => <article className={`story-stat card accent-${colors[index % colors.length]}`} key={stat.label}><strong>{stat.value}</strong><span>{stat.label}</span><p>{stat.detail}</p></article>)}</div></section>
 
         <section className="story-section container" id="story-features"><SectionHeading eyebrow="The big ones" title="Work I’m proudest of" id="features-title" /><div className="story-features">{experience.features.map((feature, index) => <article className={`story-feature card accent-${colors[index % colors.length]}`} key={feature.title}><div><h3>{feature.title}</h3><p>{feature.text}</p><ul>{feature.technologies.map((technology) => <li className="chip" key={technology}>{technology}</li>)}</ul></div><div className="story-feature__index">0{index + 1}</div></article>)}</div></section>
 

@@ -50,12 +50,16 @@ describe('portfolio routes and interactions', () => {
     expect(document.title).toBe('Four months at Invoke Media — Jake Yeo');
   });
 
-  it('renders the eight-month UBC experience with source-grounded metrics', () => {
+  it('keeps UBC scope facts in prose without a by-the-numbers strip', () => {
     renderAt('/experience/ubc-faculty-of-medicine');
     expect(screen.getByRole('heading', { name: /eight months at ubc faculty of medicine/i, level: 1 })).toBeInTheDocument();
-    expect(screen.getByText('353')).toBeInTheDocument();
-    expect(screen.getByText(/non-merge commits/i)).toBeInTheDocument();
-    expect(screen.getByText('20–50')).toBeInTheDocument();
+    expect(screen.queryByRole('heading', { name: /by the numbers/i })).not.toBeInTheDocument();
+    expect(screen.queryByRole('link', { name: /by the numbers/i })).not.toBeInTheDocument();
+    expect(document.querySelector('#story-numbers')).not.toBeInTheDocument();
+    expect(screen.queryByText('353')).not.toBeInTheDocument();
+    expect(screen.queryByText(/non-merge commits/i)).not.toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: /configurable document builder/i })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: /pdf and docx generation/i })).toBeInTheDocument();
   });
 
   it('opens, traps focus within, navigates, and closes a project screenshot gallery', async () => {
